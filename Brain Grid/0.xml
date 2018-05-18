@@ -1,0 +1,102 @@
+<states>
+   <itno>0</itno>
+
+            <xagent>
+            <name>neuron</name>
+            <id>1</id>
+            <i>1</i>
+            <j>1</j>
+            <currStage>0</currStage>
+            <type>1<type>
+            <directionStatus>{0,0,0,0,0,0,0,0}</directionStatus>
+            <neighbors>{-1,-1,-1,-1,-1,-1,-1,-1}</neighbors>
+            </xagent>
+            
+            <xagent>
+            <name>neuron</name>
+            <id>2</id>
+            <i>1</i>
+            <j>2</j>
+            <currStage>0</currStage>
+            <type>0<type>
+            <directionStatus>{0,0,0,0,0,0,0,0}</directionStatus>
+            <neighbors>{-1,-1,-1,-1,-1,-1,-1,-1}</neighbors>
+            </xagent>
+            
+            <xagent>
+            <name>neuron</name>
+            <id>3</id>
+            <i>1</i>
+            <j>3</j>
+            <currStage>0</currStage>
+            <type>1<type>
+            <directionStatus>{0,0,0,0,0,0,0,0}</directionStatus>
+            <neighbors>{-1,-1,-1,-1,-1,-1,-1,-1}</neighbors>
+            </xagent>
+            
+            <xagent>
+            <name>neuron</name>
+            <id>4</id>
+            <i>2</i>
+            <j>1</j>
+            <currStage>0</currStage>
+            <type>1<type>
+            <directionStatus>{0,0,0,0,0,0,0,0}</directionStatus>
+            <neighbors>{-1,-1,-1,-1,-1,-1,-1,-1}</neighbors>
+            </xagent>
+            
+            <xagent>
+            <name>neuron</name>
+            <id>5</id>
+            <i>2</i>
+            <j>2</j>
+            <currStage>0</currStage>
+            <type>2<type>
+            <directionStatus>{0,0,0,0,0,0,0,0}</directionStatus>
+            <neighbors>{-1,-1,-1,-1,-1,-1,-1,-1}</neighbors>
+            </xagent>
+            
+            <xagent>
+            <name>neuron</name>
+            <id>6</id>
+            <i>2</i>
+            <j>3</j>
+            <currStage>0</currStage>
+            <type>1<type>
+            <directionStatus>{0,0,0,0,0,0,0,0}</directionStatus>
+            <neighbors>{-1,-1,-1,-1,-1,-1,-1,-1}</neighbors>
+            </xagent>
+            
+            <xagent>
+            <name>neuron</name>
+            <id>7</id>
+            <i>3</i>
+            <j>1</j>
+            <currStage>0</currStage>
+            <type>2<type>
+            <directionStatus>{0,0,0,0,0,0,0,0}</directionStatus>
+            <neighbors>{-1,-1,-1,-1,-1,-1,-1,-1}</neighbors>
+            </xagent>
+            
+            <xagent>
+            <name>neuron</name>
+            <id>8</id>
+            <i>3</i>
+            <j>2</j>
+            <currStage>0</currStage>
+            <type>1<type>
+            <directionStatus>{0,0,0,0,0,0,0,0}</directionStatus>
+            <neighbors>{-1,-1,-1,-1,-1,-1,-1,-1}</neighbors>
+            </xagent>
+            
+            <xagent>
+            <name>neuron</name>
+            <id>9</id>
+            <i>3</i>
+            <j>3</j>
+            <currStage>0</currStage>
+            <type>1<type>
+            <directionStatus>{0,0,0,0,0,0,0,0}</directionStatus>
+            <neighbors>{-1,-1,-1,-1,-1,-1,-1,-1}</neighbors>
+            </xagent>
+            </states>

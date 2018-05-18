@@ -1,0 +1,66 @@
+<xmodel version="2" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+     xsi:noNamespaceSchemaLocation='http://flame.ac.uk/schema/xmml_v2.xsd'>
+
+  <name>Brain Grid</name>
+  <version>01</version>
+      <!-- FLAME Environment -->
+  <environment>
+  <functionFiles>
+    <file>functions.c</file>
+  </functionFiles>
+  </environment>
+      <!-- FLAME agents -->
+  <agents>
+    <xagent>
+      <name>neuron</name>
+      <memory>
+        <variable><type>int</type><name>id</name></variable>
+        <variable><type>int</type><name>i</name></variable>
+        <variable><type>int</type><name>j</name></variable>
+        <variable><type>int</type><name>currStage</name></variable>
+        <variable><type>int</type><name>type</name></variable>
+        <variable><type>int</type><name>directionStatus[8]</name></variable>
+        <variable><type>int</type><name>neighbors[8]</name></variable>
+      </memory>
+      <functions>
+        <function>
+          <name>write_state</name>
+          <currentState>start</currentState>
+          <nextState>read_states</nextState>
+          <outputs>
+              <output><messageName>state</messageName></output>
+          </outputs>
+        </function>
+        <function>
+          <name>read_states</name>
+          <currentState>read_states</currentState>
+          <nextState>react</nextState>
+          <inputs>
+            <input>
+              <messageName>state</messageName>
+            </input>
+          </inputs>
+        </function>
+        <function>
+          <name>react</name>
+          <currentState>react</currentState>
+          <nextState>end</nextState>
+        </function>
+      </functions>
+    </xagent>
+  </agents>
+      <!-- FLAME messages -->
+  <messages>
+    <message>
+      <name>state</name>
+      <variables>
+        <variable><type>int</type><name>id</name></variable>
+        <variable><type>int</type><name>i</name></variable>
+        <variable><type>int</type><name>j</name></variable>
+        <variable><type>int</type><name>currStage</name></variable>
+        <variable><type>int</type><name>type</name></variable>
+        <variable><type>int</type><name>directionStatus[8]</name></variable>
+      </variables>
+    </message>
+  </messages>
+</xmodel>
