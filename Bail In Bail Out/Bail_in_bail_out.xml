@@ -15,12 +15,9 @@
     <xagent>
       <name>cluster</name>
       <memory>
-        <variable><type>int</type><name>x</name></variable>
-        <variable><type>int</type><name>y</name></variable>
+        <variable><type>int</type><name>id</name></variable>
         <variable><type>int</type><name>hasbank</name></variable>
         <variable><type>int</type><name>destination</name></variable>
-        <variable><type>int_array</type><name>finances</name></variable>
-        <variable><type>int</type><name>neighbors[8]</name></variable>
       </memory>
       <functions>
         <function>
@@ -48,29 +45,23 @@
           </outputs>
         </function>
         <function>
-          <name>read_clusters</name>
+          <name>bank_dest</name>
           <currentState>4</currentState>
           <nextState>5</nextState>
           <inputs>
             <input><messageName>clusters</messageName></input>
           </inputs>
-        </function>
-        <function>
-          <name>bank_dest</name>
-          <currentState>5</currentState>
-          <nextState>6</nextState>
           <outputs>
             <output><messageName>destinations</messageName></output>
           </outputs>
         </function>
-        </functions>
+      </functions>
     </xagent>
 
     <xagent>
       <name>finance</name>
       <memory>
-        <variable><type>int</type><name>i</name></variable>
-        <variable><type>int</type><name>j</name></variable>
+        <variable><type>int</type><name>c_id</name></variable>
         <variable><type>int</type><name>type</name></variable>
         <variable><type>int</type><name>money</name></variable>
       </memory>
@@ -87,7 +78,7 @@
         <function>
           <name>update</name>
           <currentState>4</currentState>
-          <nextState>6</nextState>
+          <nextState>5</nextState>
           <inputs>
             <input><messageName>banks</messageName></input>
             <input><messageName>firms</messageName></input>
@@ -95,8 +86,8 @@
         </function>
         <function>
           <name>move</name>
-          <currentState>6</currentState>
-          <nextState>7</nextState>
+          <currentState>5</currentState>
+          <nextState>6</nextState>
           <inputs>
             <input><messageName>destinations</messageName></input>
           </inputs>
@@ -110,32 +101,28 @@
     <message>
       <name>clusters</name>
       <variables>
-        <variable><type>int</type><name>x</name></variable>
-        <variable><type>int</type><name>y</name></variable>
+        <variable><type>int</type><name>id</name></variable>
         <variable><type>int</type><name>hasbank</name></variable>
       </variables>
     </message>
     <message>
       <name>destinations</name>
       <variables>
-        <variable><type>int</type><name>x</name></variable>
-        <variable><type>int</type><name>y</name></variable>
+        <variable><type>int</type><name>id</name></variable>
         <variable><type>int</type><name>destination</name></variable>
       </variables>
     </message>
     <message>
       <name>banks</name>
       <variables>
-        <variable><type>int</type><name>i</name></variable>
-        <variable><type>int</type><name>j</name></variable>
+        <variable><type>int</type><name>c_id</name></variable>
         <variable><type>int</type><name>money</name></variable>
       </variables>
     </message>
     <message>
       <name>firms</name>
       <variables>
-        <variable><type>int</type><name>i</name></variable>
-        <variable><type>int</type><name>j</name></variable>
+        <variable><type>int</type><name>c_id</name></variable>
         <variable><type>int</type><name>money</name></variable>
       </variables>
     </message>

@@ -45,7 +45,6 @@ id = 0
 for i in xrange(ix):
     x = i + 1
     for i in xrange(jy):
-        id += 1
         y = i + 1
         weight = random()*100
 
@@ -63,17 +62,13 @@ for i in xrange(ix):
         f.write("""
             <xagent>
             <name>neuron</name>
-            <id>%d</id>""" %(id))
-        f.write("""
             <i>%d</i>
             <j>%d</j>
-            """ % (x,y))
-        f.write("""<currStage>0</currStage>
             <type>%d</type>
-            <directionStatus>{0,0,0,0,0,0,0,0}</directionStatus>
+            <direction>{0,0,0,0,0,0,0,0}</direction>
             <neighbors>{-1,-1,-1,-1,-1,-1,-1,-1}</neighbors>
             </xagent>
-            """ %(type))
+            """ % (x,y,type))
 
 # End XML file and close
 f.write("</states>\n")
