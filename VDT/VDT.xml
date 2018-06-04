@@ -20,6 +20,7 @@
         <variable><type>int</type><name>total_phases</name></variable>
         <variable><type>int</type><name>fund</name></variable>
         <variable><type>int</type><name>is_hiring</name></variable>
+        <variable><type>int_array</type><name>employees</name></variable>
       </memory>
       <functions>
         <function>
@@ -96,13 +97,12 @@
       <name>developer</name>
       <memory>
         <variable><type>int</type><name>d_id</name></variable>
-        <variable><type>int</type><name>d_super_id</name></variable>
         <variable><type>int</type><name>is_working</name></variable>
       </memory>
       <functions>
         <function>
           <name>write_devs</name>
-          <currentState>0</currentState>
+          <currentState>2</currentState>
           <nextState>3</nextState>
           <outputs>
             <output><messageName>devs</messageName></output>
@@ -170,7 +170,6 @@
       <name>devs</name>
       <variables>
         <variable><type>int</type><name>d_id</name></variable>
-        <variable><type>int</type><name>d_super_id</name></variable>
         <variable><type>int</type><name>is_working</name></variable>
       </variables>
     </message>

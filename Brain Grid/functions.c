@@ -124,13 +124,15 @@ int read_states()
 
 int react()
 {
-
+  srand(time(NULL));
+  int neutral_tracker = 0;
   if (TYPE == INACTIVE){
     for (int i = 0 ; i <8 ; i++ ){
       DIRECTION[i] = STOP;
     }
   }
-
+  //
+  //TODO only one direction per turn
   if (TYPE == NEUTRAL){
 
     for (int i =0 ; i< 8 ; i++){
@@ -140,17 +142,25 @@ int react()
         if (DIRECTION[i] == IN && DIRECTION [7-i] == STOP)
         {
           DIRECTION[7-i] =OUT;
+          neutral_tracker ++;
         }
         else if (DIRECTION[i] == IN && DIRECTION [7-i]== IN)
         {
           DIRECTION[i] = STOP;
+          neutral_tracker ++;
         }
+      }
+    }
+    if (neutral_tracker > 0){
+      int picked_direction = rand() % neutral_tracker;
+      for (int i =0 ; i < 8 ; i++){
+        if (i != picked_direction) DIRECTION[i] = STOP;
       }
     }
   }
 
   if (TYPE == ACTIVE){
-      srand(time(NULL))
+
       int randDir = rand()%8;
       DIRECTION[randDir] = OUT;
 

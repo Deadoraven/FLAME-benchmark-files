@@ -50,19 +50,19 @@ for i in xrange(ix):
     for i in xrange(jy):
         id += 1
         y = i + 1
-        alive = random() * 2 + 1
+        alive = random() * 2
         if(alive):
-            state = random() * 2 + 1
+            state = random() * 2
         else:
             state = 0
         # write agent values to file
         f.write("""
         <xagent>
-            <name>cluster</name>
+            <name>bacteria</name>
             <i>%d</i>
             <j>%d</j>
             """ % (x,y))
-        f.write("""<alive>%d</hasbank>
+        f.write("""<alive>%d</alive>
             <state>%d</state>
             <has_agents>-1</has_agents>
             <neighbors>{-1,-1,-1,-1,-1,-1,-1,-1}</neighbors>
@@ -70,49 +70,40 @@ for i in xrange(ix):
             """ % (alive, state))
 
 
-
-for i in xrange(3):
-    infectingId += 1
-    infectX = random()*ix
-    infectY = random()*jy
+for i in xrange(6):
+    cleanX = random()*ix + 1
+    cleanY = random()*jy + 1
     energy = 8
 
-
-        f.write("""
-        <xagent>
-            <name>agent</name>
-            <i>%d</i>
-            <j>%d</j>
-            """ % (infectX,infectY))
-        f.write("""<state>1</state>
-            <energy>%d</energy>
-        </xagent>
-            """,(energy))
-
-
-        banksList.append([bankX,bankY])
-    else:
-        i -= 1
-        continue
+    f.write("""
+    <xagent>
+        <name>agents</name>
+        <x>%d</x>
+        <y>%d</y>
+        """ % (cleanX,cleanY))
+    f.write("""<energy>%d</energy>
+        <state>0</state>
+    </xagent>
+        """%(energy))
 
 
 
-for i in xrange(12):
-    infectingId += 1
-    infectX = random()*ix
-    infectY = random()*jy
+
+for i in xrange(6):
+    infectX = random()*ix + 1
+    infectY = random()*jy + 1
     energy = 8
 
-        f.write("""
-        <xagent>
-            <name>agent</name>
-            <i>%d</i>
-            <j>%d</j>
-            """ % (infectX,infectY))
-        f.write("""<state>1</state>
-            <energy>%d</energy>
-        </xagent>
-            """,(energy))
+    f.write("""
+    <xagent>
+        <name>agents</name>
+        <x>%d</x>
+        <y>%d</y>
+        """ % (infectX,infectY))
+    f.write("""<energy>%d</energy>
+        <a_state>1</a_state>
+    </xagent>
+        """%(energy))
 
 
 # End XML file and close

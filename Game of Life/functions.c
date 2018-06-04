@@ -8,24 +8,16 @@
 
 int write_state()
 {
-  int my_state, my_id, my_i, my_j;
-  my_state = get_state();
-  my_id = get_id();
-  my_i = get_i();
-  my_j = get_j();
-  if (my_state == 1) {
-    add_state_message(my_id, my_i, my_j, my_state);
+  if (STATE == 1) {
+    add_state_message(ID, I, J, STATE);
   }
   return 0;
 }
 int read_states()
 {
-  int my_id, my_i, my_j;
+
   int mes_id, mes_i, mes_j, mes_state;
   int count;
-  my_id = get_id();
-  my_i = get_i();
-  my_j = get_j();
 
   for (count = 0; count <= 7; count++)
     NEIGHBORS[count] = 0;
@@ -36,20 +28,19 @@ int read_states()
   START_STATE_MESSAGE_LOOP;
 
   //is it another agent?
-  if (state_message->id != my_id) {
-    mes_id = state_message->id;
+  if (state_message->id != ID) {
     mes_i = state_message->i;
     mes_j = state_message->j;
 
     //check if it is a neighbor
-    if (((mes_i == my_i - 1) && (mes_j == my_j - 1)) ||
-        ((mes_i == my_i - 1) && (mes_j == my_j)) ||
-        ((mes_i == my_i - 1) && (mes_j == my_j + 1)) ||
-        ((mes_i == my_i) && (mes_j == my_j - 1)) ||
-        ((mes_i == my_i) && (mes_j == my_j + 1)) ||
-        ((mes_i == my_i + 1) && (mes_j == my_j - 1)) ||
-        ((mes_i == my_i + 1) && (mes_j == my_j)) ||
-        ((mes_i == my_i + 1) && (mes_j == my_j + 1))) {
+    if (((mes_i == I - 1) && (mes_j == J - 1)) ||
+        ((mes_i == I - 1) && (mes_j == J)) ||
+        ((mes_i == I - 1) && (mes_j == J + 1)) ||
+        ((mes_i == I) && (mes_j == J - 1)) ||
+        ((mes_i == I) && (mes_j == J + 1)) ||
+        ((mes_i == I + 1) && (mes_j == J - 1)) ||
+        ((mes_i == I + 1) && (mes_j == J)) ||
+        ((mes_i == I + 1) && (mes_j == J + 1))) {
 
       //add neighbor state to neighbors
       mes_state = state_message->state;
@@ -65,13 +56,7 @@ int read_states()
 int react()
 {
   //retreive the initail info of the agent
-  int my_id, my_i, my_j, my_state;
   int i, count;
-
-  my_id = get_id();
-  my_i = get_i();
-  my_j = get_j();
-  my_state = get_state();
 
   //count to keep track of alive neighbors
   count = 0;
@@ -81,13 +66,11 @@ int react()
   }
 
   //react to neighbors
-  if (count < 2)  my_state = 0;
-  if (count == 2) my_state = my_state;
-  if (count == 3) my_state = 1;
-  if (count > 3)  my_state = 0;
+  if (count < 2)  STATE = 0;
+  if (count == 2) continue;
+  if (count == 3) STATE = 1;
+  if (count > 3)  STATE = 0;
 
-  //set the new state
-  set_state(my_state);
 
   return 0;
 }

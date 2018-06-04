@@ -1,6 +1,6 @@
 <xmodel version="2" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation='http://flame.ac.uk/schema/xmml_v2.xsd'>
 
-  <name>Bail in Bail out</name>
+  <name>Social Network</name>
   <version>01</version>
 
   <!-- FLAME Environment -->
@@ -13,92 +13,26 @@
   <!-- FLAME agents -->
   <agents>
     <xagent>
-      <name>cluster</name>
+      <name>person</name>
       <memory>
-        <variable><type>int</type><name>x</name></variable>
-        <variable><type>int</type><name>y</name></variable>
-        <variable><type>int</type><name>hasbank</name></variable>
-        <variable><type>int</type><name>destination</name></variable>
-        <variable><type>int_array</type><name>finances</name></variable>
-        <variable><type>int</type><name>neighbors[8]</name></variable>
+        <variable><type>int</type><name>id</name></variable>
+        <variable><type>int_array</type><name>friends</name></variable>
       </memory>
       <functions>
         <function>
-          <name>set_has_bank</name>
+          <name>write_friends</name>
+          <currentState>0</currentState>
+          <nextState>1</nextState>
+          <outputs>
+            <output><messageName>social</messageName></output>
+          </outputs>
+        </function>
+        <function>
+          <name>find_degrees</name>
           <currentState>1</currentState>
           <nextState>2</nextState>
           <inputs>
-            <input><messageName>banks</messageName></input>
-          </inputs>
-        </function>
-        <function>
-          <name>find_firms</name>
-          <currentState>2</currentState>
-          <nextState>3</nextState>
-          <inputs>
-            <input><messageName>firms</messageName></input>
-          </inputs>
-        </function>
-        <function>
-          <name>write_clusters</name>
-          <currentState>3</currentState>
-          <nextState>4</nextState>
-          <outputs>
-            <output><messageName>clusters</messageName></output>
-          </outputs>
-        </function>
-        <function>
-          <name>read_clusters</name>
-          <currentState>4</currentState>
-          <nextState>5</nextState>
-          <inputs>
-            <input><messageName>clusters</messageName></input>
-          </inputs>
-        </function>
-        <function>
-          <name>bank_dest</name>
-          <currentState>5</currentState>
-          <nextState>6</nextState>
-          <outputs>
-            <output><messageName>destinations</messageName></output>
-          </outputs>
-        </function>
-        </functions>
-    </xagent>
-
-    <xagent>
-      <name>finance</name>
-      <memory>
-        <variable><type>int</type><name>i</name></variable>
-        <variable><type>int</type><name>j</name></variable>
-        <variable><type>int</type><name>type</name></variable>
-        <variable><type>int</type><name>money</name></variable>
-      </memory>
-      <functions>
-        <function>
-          <name>write_agents</name>
-          <currentState>0</currentState>
-          <nextState>4</nextState>
-          <outputs>
-            <output><messageName>banks</messageName></output>
-            <output><messageName>firms</messageName></output>
-          </outputs>
-        </function>
-        <function>
-          <name>update</name>
-          <currentState>4</currentState>
-          <nextState>6</nextState>
-          <inputs>
-            <input><messageName>banks</messageName></input>
-            <input><messageName>firms</messageName></input>
-          </inputs>
-        </function>
-        <function>
-          <name>move</name>
-          <currentState>6</currentState>
-          <nextState>7</nextState>
-          <inputs>
-            <input><messageName>destinations</messageName></input>
+            <input><messageName>social</messageName></input>
           </inputs>
         </function>
       </functions>
@@ -108,35 +42,10 @@
   <!-- FLAME messages -->
   <messages>
     <message>
-      <name>clusters</name>
+      <name>social</name>
       <variables>
-        <variable><type>int</type><name>x</name></variable>
-        <variable><type>int</type><name>y</name></variable>
-        <variable><type>int</type><name>hasbank</name></variable>
-      </variables>
-    </message>
-    <message>
-      <name>destinations</name>
-      <variables>
-        <variable><type>int</type><name>x</name></variable>
-        <variable><type>int</type><name>y</name></variable>
-        <variable><type>int</type><name>destination</name></variable>
-      </variables>
-    </message>
-    <message>
-      <name>banks</name>
-      <variables>
-        <variable><type>int</type><name>i</name></variable>
-        <variable><type>int</type><name>j</name></variable>
-        <variable><type>int</type><name>money</name></variable>
-      </variables>
-    </message>
-    <message>
-      <name>firms</name>
-      <variables>
-        <variable><type>int</type><name>i</name></variable>
-        <variable><type>int</type><name>j</name></variable>
-        <variable><type>int</type><name>money</name></variable>
+        <variable><type>int</type><name>id</name></variable>
+        <variable><type>int</type><name>connections[22]</name></variable>
       </variables>
     </message>
   </messages>
