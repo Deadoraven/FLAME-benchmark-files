@@ -64,46 +64,29 @@ for i in xrange(ix):
             """ % (x,y))
         f.write("""<alive>%d</alive>
             <state>%d</state>
-            <has_agents>-1</has_agents>
-            <neighbors>{-1,-1,-1,-1,-1,-1,-1,-1}</neighbors>
+            <has_cleaning_agents>-1</has_cleaning_agents>
+            <has_infecting_agents>-1</has_infecting_agents>
         </xagent>
             """ % (alive, state))
 
 
-for i in xrange(6):
-    cleanX = random()*ix + 1
-    cleanY = random()*jy + 1
-    energy = 8
+for i in xrange(20000):
+
+    agentX = random()*ix + 1
+    agentY = random()*jy + 1
+    energy = 20
+    state = random()*2
 
     f.write("""
     <xagent>
         <name>agents</name>
         <x>%d</x>
         <y>%d</y>
-        """ % (cleanX,cleanY))
+        """ % (agentX,agentY))
     f.write("""<energy>%d</energy>
-        <state>0</state>
+        <a_state>%d</a_state>
     </xagent>
-        """%(energy))
-
-
-
-
-for i in xrange(6):
-    infectX = random()*ix + 1
-    infectY = random()*jy + 1
-    energy = 8
-
-    f.write("""
-    <xagent>
-        <name>agents</name>
-        <x>%d</x>
-        <y>%d</y>
-        """ % (infectX,infectY))
-    f.write("""<energy>%d</energy>
-        <a_state>1</a_state>
-    </xagent>
-        """%(energy))
+        """%(energy,state))
 
 
 # End XML file and close

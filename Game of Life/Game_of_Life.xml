@@ -18,7 +18,7 @@
         <variable><type>int</type><name>i</name></variable>
         <variable><type>int</type><name>j</name></variable>
         <variable><type>int</type><name>state</name></variable>
-        <variable><type>int</type><name>neighbors[8]</name></variable>
+        <variable><type>int</type><name>count</name></variable>
       </memory>
       <functions>
         <function>

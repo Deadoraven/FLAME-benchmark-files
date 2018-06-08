@@ -98,6 +98,7 @@
       <memory>
         <variable><type>int</type><name>d_id</name></variable>
         <variable><type>int</type><name>is_working</name></variable>
+        <variable><type>int</type><name>reserve</name></variable>
       </memory>
       <functions>
         <function>
@@ -171,6 +172,7 @@
       <variables>
         <variable><type>int</type><name>d_id</name></variable>
         <variable><type>int</type><name>is_working</name></variable>
+        <variable><type>int</type><name>reserve</name></variable>
       </variables>
     </message>
     <message>

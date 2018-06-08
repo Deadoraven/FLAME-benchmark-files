@@ -8,6 +8,7 @@ import re
 import os
 import sys
 from random import random
+from random import randint
 from enum import Enum
 
 
@@ -53,7 +54,7 @@ for i in xrange(iy):
         if (i == j ):
             matrix [i][j] = 0
         else :
-            matrix[i][j] = matrix [j][i] = (int)(random() * 60)
+            matrix[i][j] = matrix [j][i] = randint(15, 70)
 
 
 
@@ -66,7 +67,7 @@ for i in xrange(iy):
     <xagent>
         <name>place</name>
         <p_id>%d</p_id>
-        <num_cars>1</num_cars>
+        <num_cars>0</num_cars>
         <paths_found>0</paths_found>
         <destinations>{""" % y)
 
@@ -86,9 +87,31 @@ for j in range(ix):
     currPlace = 0
     x = j + 1
     while (final_dest == currPlace):
-        final_dest = (int)(random()* iy + 1)
-        currPlace = (int)(random()* iy + 1)
+        if (x < (ix*34/100)):
+            currPlace = randint(0, (iy*17/100))
+            if (currPlace == 0):
+                currPlace = 1
+        elif (x < (ix*47/100)):
+            currPlace = randint((iy*17/100), (iy*44/100))
+        elif (x < (ix*53/100)):
+            currPlace = randint((iy*44/100), (iy*56/100))
+        elif (x < (ix*66/100)):
+            currPlace = randint((iy*56/100), (iy*83/100))
+        else:
+            currPlace = randint((iy*83/100), iy)
 
+        if (x < (ix*3/100)):
+            final_dest = randint(0, (iy*6/100))
+            if (final_dest == 0):
+                final_dest = 1
+        elif (x < (ix*16/100)):
+            final_dest = randint((iy*6/100), (iy*34/100))
+        elif (x < (ix*84/100)):
+            final_dest = randint((iy*34/100), (iy*67/100))
+        elif (x < (ix*97/100)):
+            final_dest = randint((iy*67/100), (iy*94/100))
+        else:
+            final_dest = randint((iy*94/100), iy)
 
     f.write("""
     <xagent>

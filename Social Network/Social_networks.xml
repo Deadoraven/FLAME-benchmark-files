@@ -45,7 +45,7 @@
       <name>social</name>
       <variables>
         <variable><type>int</type><name>id</name></variable>
-        <variable><type>int</type><name>connections[22]</name></variable>
+        <variable><type>int</type><name>connections[484]</name></variable>
       </variables>
     </message>
   </messages>

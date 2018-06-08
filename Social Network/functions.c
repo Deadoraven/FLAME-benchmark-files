@@ -1,9 +1,14 @@
 #include "header.h"
 #include "person_agent_header.h"
 
-int MAX_PEOPLE = 22*22;
+int MAX_PEOPLE = 484;
 int_array degreeFriends;
-
+/**
+ * receiving a value and check if that value already exists in the array
+ * if not exists add it to array of degreeFriends
+ * @param  value = id of a friend
+ * @return       0
+ */
 int remove_dup(int value)
 {
     int duplicate = 0;
@@ -14,13 +19,18 @@ int remove_dup(int value)
     return 0;
 }
 
+/**
+ * create the connections Static array
+ * and write all agents on the message board.
+ * @return 0
+ */
 int write_friends(){
 
-  int mes_id, count;
   int connections[MAX_PEOPLE];
-  init_int_array(&FRIENDS);
+  init_int_array(&degreeFriends);
   for (int i = 0; i < MAX_PEOPLE ; i++){
     if (i < FRIENDS.size) connections[i] = FRIENDS.array[i];
+
     else connections[i] = -1;
   }
 
@@ -28,83 +38,50 @@ int write_friends(){
   return 0;
 }
 
+/**
+ * find one degree away from friends
+ * @return 0
+ */
 int find_degrees(){
 
-  int  mes_id_deg2, mes_id_deg3, mes_id_deg4;
-  int * mes_friends_deg2;
-  int * mes_friends_deg3;
-  int * mes_friends_deg4;
 
+  int  mes_id;
+  int * mes_friends;
 
   START_SOCIAL_MESSAGE_LOOP //adding first and second degree
 
-    mes_id_deg2 = social_message->id;
+    mes_id = social_message->id;
 
-    for (int i = 0 ; i < MAX_PEOPLE; i++ ){
+    for (int i = 0 ; i < FRIENDS.size; i++ ){
 
-      if(mes_id_deg2 == FRIENDS[i]){
+      if(mes_id == FRIENDS.array[i]){
 
-        mes_friends_deg2 = social_message->connections;
-
-        START_SOCIAL_MESSAGE_LOOP // adding third degree
-
-          mes_id_deg3 = social_message->id;
-
-          for (int i = 0 ; i < MAX_PEOPLE; i++ ){
-
-            if(mes_id_deg3 == mes_friends_deg2[i]){
-
-              mes_friends_deg3 = social_message->connections;
-
-              START_SOCIAL_MESSAGE_LOOP // looping for the fourth degree
-
-                mes_id_deg4 = social_message->id;
-
-                for (int i = 0 ; i < MAX_PEOPLE; i++ ){
-
-                  if(mes_id_deg4 == mes_friends_deg3[i]){
-
-                    mes_friends_deg4 = social_message->connections;
-
-                    for(int i = 0; i < MAX_PEOPLE; i++){
-
-                      if(mes_friends_deg4[i] != -1){
-
-                         remove_dup(mes_friends_deg4[i]);
-                      }
-                    }
-                  }
-                }
-              FINISH_SOCIAL_MESSAGE_LOOP // 4th
-
-              for(int i = 0; i < MAX_PEOPLE; i++){
-
-                if(mes_friends_deg3[i] != -1){
-
-                   remove_dup(mes_friends[i]);
-                }
-              }
-            }
-          }
-        FINISH_SOCIAL_MESSAGE_LOOP
+        mes_friends = social_message->connections;
 
         for(int i = 0; i < MAX_PEOPLE; i++){
-          if(mes_friends_deg2[i] != -1){
-             remove_dup(mes_friends_deg2[i]);
+          if(mes_friends[i] != -1){
+             remove_dup(mes_friends[i]);
+
           }
         }
       }
     }
   FINISH_SOCIAL_MESSAGE_LOOP
 
-  for (int i =0 ; i < MAX_PEOPLE ; i++ ) if(FRIENDS[i] != -1) remove_dup(FRIENDS[i]);//1st degree
-
+  for (int i =0 ; i < FRIENDS.size ; i++ ) {
+    remove_dup(FRIENDS.array[i]);//1st degree
+  }
   // printf("Degree of freedom is 2: ");
   // for (int i =0 ; i< degreeFriends.size; i++){
-  //   printf("%d ",degreeFriends.array[i]);
+  // printf("%d ",degreeFriends.array[i]);
+  reset_int_array(&FRIENDS);
+  init_int_array(&FRIENDS);
+  for (int i= 0; i < degreeFriends.size; i ++ ){
+    add_int(&FRIENDS, degreeFriends.array[i]);
   }
-  // printf("\n");
   reset_int_array(&degreeFriends);
 
   return 0;
+  // printf("\n");
+
 }

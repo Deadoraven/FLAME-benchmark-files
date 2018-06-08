@@ -18,14 +18,19 @@
         <variable><type>int</type><name>j</name></variable>
         <variable><type>int</type><name>alive</name></variable>
         <variable><type>int</type><name>state</name></variable>
-        <variable><type>int</type><name>has_agents</name></variable>
-        <variable><type>int</type><name>neighbors[8]</name></variable>
+        <variable><type>int</type><name>has_cleaning_agents</name></variable>
+        <variable><type>int</type><name>has_infecting_agents</name></variable>
       </memory>
       <functions>
         <function>
           <name>write_bacteria</name>
           <currentState>0</currentState>
           <nextState>1</nextState>
+          <condition>
+            <lhs><value>a.alive</value></lhs>
+            <op>EQ</op>
+            <rhs><value>1</value></rhs>
+          </condition>
           <outputs>
               <output><messageName>bacteria</messageName></output>
           </outputs>
@@ -34,6 +39,11 @@
           <name>read_bacteria</name>
           <currentState>1</currentState>
           <nextState>2</nextState>
+          <condition>
+            <lhs><value>a.alive</value></lhs>
+            <op>EQ</op>
+            <rhs><value>1</value></rhs>
+          </condition>
           <inputs>
             <input><messageName>bacteria</messageName></input>
           </inputs>
@@ -42,6 +52,11 @@
           <name>disperseBacteria</name>
           <currentState>2</currentState>
           <nextState>6</nextState>
+          <condition>
+            <lhs><value>a.alive</value></lhs>
+            <op>EQ</op>
+            <rhs><value>1</value></rhs>
+          </condition>
         </function>
         <function>
           <name>find_agents</name>
@@ -55,6 +70,11 @@
           <name>disperseAgentInfluence</name>
           <currentState>7</currentState>
           <nextState>11</nextState>
+          <condition>
+            <lhs><value>a.alive</value></lhs>
+            <op>EQ</op>
+            <rhs><value>1</value></rhs>
+          </condition>
         </function>
         <function>
           <name>find_agents</name>
@@ -68,6 +88,11 @@
           <name>disperseAgentInfluence</name>
           <currentState>12</currentState>
           <nextState>13</nextState>
+          <condition>
+            <lhs><value>a.alive</value></lhs>
+            <op>EQ</op>
+            <rhs><value>1</value></rhs>
+          </condition>
         </function>
       </functions>
     </xagent>
@@ -75,6 +100,7 @@
     <xagent>
         <name>agents</name>
         <memory>
+          <variable><type>int</type><name>id</name></variable>
           <variable><type>int</type><name>x</name></variable>
           <variable><type>int</type><name>y</name></variable>
           <variable><type>int</type><name>energy</name></variable>
@@ -137,7 +163,8 @@
         <variable><type>int</type><name>j</name></variable>
         <variable><type>int</type><name>alive</name></variable>
         <variable><type>int</type><name>state</name></variable>
-        <variable><type>int</type><name>has_agents</name></variable>
+        <variable><type>int</type><name>has_cleaning_agents</name></variable>
+        <variable><type>int</type><name>has_infecting_agents</name></variable>
       </variables>
     </message>
     <message>

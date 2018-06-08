@@ -61,12 +61,12 @@ for i in xrange(ix):
         # write agent values to file
         f.write("""
             <xagent>
-            <name>neuron</name>
-            <i>%d</i>
-            <j>%d</j>
-            <type>%d</type>
-            <direction>{0,0,0,0,0,0,0,0}</direction>
-            <neighbors>{-1,-1,-1,-1,-1,-1,-1,-1}</neighbors>
+                <name>neuron</name>
+                <i>%d</i>
+                <j>%d</j>
+                <type>%d</type>
+                <direction_x>-1</direction_x>
+                <direction_y>-1</direction_y>
             </xagent>
             """ % (x,y,type))
 

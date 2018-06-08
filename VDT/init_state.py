@@ -8,6 +8,7 @@ import re
 import os
 import sys
 from random import random
+from random import randint
 from enum import Enum
 
 
@@ -45,7 +46,7 @@ numPhases = []
 
 for i in xrange(ix):
     x = i + 1
-    numPhases.append((int)(random() * 3) + 3)
+    numPhases.append(randint(10,29))
     # write agent values to file
     f.write("""
         <xagent>
@@ -62,9 +63,9 @@ for i in range(len(numPhases)):
     x = i + 1
     for j in range(numPhases[i]):
         y = j + 1
-        devs = (int)(random() * 3) + 1
-        initMoney = (int)(random() * 500) + 1
-        totMoney = devs * 1000 + initMoney
+        devs = (randint(21,30)
+        initMoney = (randint(11,20)
+        totMoney = devs * 3 + initMoney
 
         f.write("""
     <xagent>
@@ -79,16 +80,27 @@ for i in range(len(numPhases)):
 
 
 
-for i in range (20):
+for i in range (6000):
     x = i + 1
     f.write("""
     <xagent>
         <name>developer</name>
         <d_id>%d</d_id>
         <is_working>0</is_working>
+        <reserve>0</reserve>
     </xagent>""" % (x))
 
-hqMoney = random() * 100000
+for i in range (6000,10000)):
+    x = i + 1
+    f.write("""
+    <xagent>
+        <name>developer</name>
+        <d_id>%d</d_id>
+        <is_working>0</is_working>
+        <reserve>1</reserve>
+    </xagent>""" % (x))
+
+hqMoney =  randint(100000,150000)
 f.write("""
     <xagent>
         <name>headquarter</name>

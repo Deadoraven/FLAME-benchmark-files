@@ -4,7 +4,7 @@
 #include "headquarter_agent_header.h"
 #include "developer_agent_header.h"
 
-int_array employed, laidoff, dispersed_funds;
+int_array employed, laidoff, reserve_employed, reserve_laidoff, dispersed_funds;
 int spent_money;
 
 /**
@@ -30,11 +30,18 @@ int layoff()
     int index;
 
     while (IS_HIRING < 0){
-
-      index = EMPLOYEES.size - 1;
-      add_int(&laidoff, EMPLOYEES.array[index]);
-      remove_int(&EMPLOYEES,index);
-      IS_HIRING ++;
+      if(reserve_employed.size > 0){
+        index = EMPLOYEES.size - 1;
+        add_int(&reserve_laidoff, EMPLOYEES.array[index]);
+        remove_int(&EMPLOYEES,index);
+        IS_HIRING ++;
+      }
+      else {
+        index = EMPLOYEES.size - 1;
+        add_int(&laidoff, EMPLOYEES.array[index]);
+        remove_int(&EMPLOYEES,index);
+        IS_HIRING ++;
+      }
     }
     return 0;
 }
@@ -45,13 +52,23 @@ int layoff()
  */
 int dev_quit()
 {
+  if (RESERVE){
+    for (int i = 0 ; i < reserve_laidoff.size; i++){
+      if (reserve_laidoff.array[i]== ID){
+        IS_WORKING = 0;
+        return 1;
+      }
+    }
+  }
+  else{
     for (int i = 0 ; i < laidoff.size; i++){
       if (laidoff.array[i]== ID){
         IS_WORKING = 0;
         return 1;
       }
     }
-    return 0;
+  }
+  return 0;
 }
 /*******************************************************
  ******** All functions related to Supervisors**********
@@ -75,6 +92,8 @@ int req_check()
   init_int_array(&EMPLOYEES);
   init_int_array(&employed);
   init_int_array(&laidoff);
+  init_int_array(&reserve_employed);
+  init_int_array(&reserve_laidoff);
   init_int_array(&dispersed_funds);
   int mes_id, mes_superID, mes_devNeed, mes_moneyNeed;
 
@@ -133,10 +152,18 @@ int hire()
       if (IS_HIRING > 0){ // do we still need to hire more?
         mes_id = devs_message->d_id;
         mes_isWorking = devs_message->is_working;
+        mes_reserve = devs_message->reserve;
 
         if (!mes_isWorking && !isEmployed(mes_id) ){
-          IS_HIRING --;
-          add_int(&EMPLOYEES, mes_id);
+          if(!mes_reserve){
+            IS_HIRING --;
+            add_int(&EMPLOYEES, mes_id);
+          }
+          else{
+            IS_HIRING --;
+            add_int(&EMPLOYEES, mes_id);
+            add_int(&reserve_employed, mes_id);
+          }
         }
       }
       else break;
@@ -216,7 +243,7 @@ int check_end()
  */
 int write_devs()
 {
-    add_devs_message(D_ID, IS_WORKING);
+    add_devs_message(D_ID, IS_WORKING, RESERVE);
     return 0;
 }
 
@@ -227,7 +254,7 @@ int write_devs()
  */
 int hire_devs()
 {
-    if (laidoff.size > 0) dev_quit();
+    if (reserve_laidoff.size > 0 || laidoff.size > 0) dev_quit();
     for (int i = 0; i < employed.size ; i++){
       if (employed.array[i] == D_ID) IS_WORKING = 1;
     }

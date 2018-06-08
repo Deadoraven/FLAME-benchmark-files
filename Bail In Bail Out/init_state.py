@@ -60,7 +60,7 @@ for i in xrange(ix):
 i = 0
 banksList = []
 
-while (i < 3):
+while (i < 450):
     bankCID = (int)(random() * ix) + 1
     if bankCID not in banksList:
         money = random() * 1000 + 1
@@ -81,7 +81,7 @@ while (i < 3):
 
 
 
-for i in xrange(12):
+for i in xrange(4500):
 
     firmCID = random()*ix + 1
     money = -(random() * 100 + 1)

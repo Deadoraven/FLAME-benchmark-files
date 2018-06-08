@@ -10,8 +10,13 @@ enum financialEntity{
     CLUSTER,FIRM,BANK
 };
 
-
-//write clusters on clusters board
+/*******************************************************
+ ******** All functions related to Clusters ************
+ *******************************************************/
+/**
+ * write clusters on the message
+ * @return 0
+ */
 int write_clusters()
 {
     //write them on messageboard
@@ -19,17 +24,10 @@ int write_clusters()
     return 0;
 }
 
-//write all agents on the agents board
-int write_agents()
-{
-    if (TYPE == BANK) add_banks_message(C_ID, MONEY);
-
-    else if (TYPE == FIRM) add_firms_message(C_ID, MONEY);
-
-    return 0;
-
-}
-
+/**
+ * set hasbank if there's a bank with money here.
+ * @return 0
+ */
 int set_has_bank(){
 
     int mes_cid, mes_money;
@@ -46,6 +44,10 @@ int set_has_bank(){
     return 0 ;
 }
 
+/**
+ * find if there's any firms in this cluster or not
+ * @return 0
+ */
 int find_firms(){
 
     int mes_cid, mes_money;
@@ -62,10 +64,16 @@ int find_firms(){
     return 0;
 }
 
+/**
+ * determine the next destination for the bank in this cluster
+ * @return 0
+ */
 
-int bank_dest(){
+int bank_dest()
+{
 
-    init_int_array(&in_need);
+    int already_taken = 0;
+
     if (HASBANK == BANK){
         int count, numDest, newDest, mes_id, mes_hasbank;
         count = 0;
@@ -75,38 +83,47 @@ int bank_dest(){
           mes_hasbank = clusters_message->hasbank;
 
           if (mes_id != ID && mes_hasbank == FIRM){
-            add_int(&in_need, mes_id);
-            count ++;
+            for (int i = 0 ;i < taken.size; i++){
+              if (taken.array[i] == mes_id) already_taken = 1;
+            }
+            if(!already_taken){
+              add_int(&taken, mes_id);
+              DESTINATION = mes_id;
+            }
           }
+          else DESTINATION = 0;
+
         FINISH_CLUSTERS_MESSAGE_LOOP
 
-        if(count > 0){
-            int i = 0;
-            srand (time(NULL));
-            numDest = rand() % count;
-            newDest = in_need.array[numDest];
-
-            if(count > 1){
-              while(i < taken.size){
-
-                if(taken.array[i] == newDest){
-                  numDest = rand() % count;
-                  newDest = in_need.array[numDest];
-                }
-                else i++;
-              }
-              add_int(&taken, newDest);
-              DESTINATION = newDest;
-            }
-            else if (count == 1) DESTINATION = newDest;
-            else DESTINATION = 0;
-        }
     }
-    free_int_array(&in_need);
+
     add_destinations_message(ID, DESTINATION);
+
     return 0;
 }
 
+/*******************************************************
+ ****** All functions related to financialEntities *****
+ *******************************************************/
+
+/**
+ * write agents on message board
+ * @return 0
+ */
+int write_agents()
+{
+    if (TYPE == BANK) add_banks_message(C_ID, MONEY);
+
+    else if (TYPE == FIRM) add_firms_message(C_ID, MONEY);
+
+    return 0;
+
+}
+
+/**
+ * update all the money in banks and firms
+ * @return 0
+ */
 int update(){
 
     int mes_cid, mes_money;
@@ -150,7 +167,10 @@ int update(){
     return 0;
 }
 
-
+/**
+ * move banks to new place
+ * @return 0
+ */
 int move(){
     int my_cid;
     reset_int_array(&taken);

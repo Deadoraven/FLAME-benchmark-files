@@ -6,6 +6,10 @@
 #include "header.h"
 #include "life_agent_header.h"
 
+/**
+ * writing alive agents on message board
+ * @return [description]
+ */
 int write_state()
 {
   if (STATE == 1) {
@@ -13,16 +17,16 @@ int write_state()
   }
   return 0;
 }
+
+/**
+ * read and find alive neighbors and increase count
+ * @return 0
+ */
 int read_states()
 {
 
-  int mes_id, mes_i, mes_j, mes_state;
-  int count;
+  int mes_i, mes_j, mes_state;
 
-  for (count = 0; count <= 7; count++)
-    NEIGHBORS[count] = 0;
-
-  count = 0;
 
   //start reading the messageboard
   START_STATE_MESSAGE_LOOP;
@@ -42,35 +46,27 @@ int read_states()
         ((mes_i == I + 1) && (mes_j == J)) ||
         ((mes_i == I + 1) && (mes_j == J + 1))) {
 
-      //add neighbor state to neighbors
-      mes_state = state_message->state;
-      NEIGHBORS[count] = mes_state;
-      count++;
+          //add neighbor state to neighbors
+          mes_state = state_message->state;
+          if (mes_state == 1) COUNT++;
     }
   }
+
   //end of loop
   FINISH_STATE_MESSAGE_LOOP;
   return 0;
 }
 
+/**
+ * react accordingly following the conway's game of life
+ * @return 0
+ */
 int react()
 {
-  //retreive the initail info of the agent
-  int i, count;
-
-  //count to keep track of alive neighbors
-  count = 0;
-  //check how many neighbors are alive
-  for (i = 0; i < 8; i++) {
-    if (NEIGHBORS[i] == 1) count++;
-  }
-
   //react to neighbors
-  if (count < 2)  STATE = 0;
-  if (count == 2) continue;
-  if (count == 3) STATE = 1;
-  if (count > 3)  STATE = 0;
-
+  if (COUNT < 2)  STATE = 0;
+  if (COUNT == 3) STATE = 1;
+  if (COUNT > 3)  STATE = 0;
 
   return 0;
 }

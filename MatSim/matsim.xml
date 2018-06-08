@@ -59,7 +59,7 @@
         <variable><type>int</type><name>p_id</name></variable>
         <variable><type>int</type><name>num_cars</name></variable>
         <variable><type>int</type><name>matrix_created</name></variable>
-        <variable><type>int</type><name>destinations[30]</name></variable>
+        <variable><type>int</type><name>destinations[200]</name></variable>
       </memory>
       <functions>
         <function>
