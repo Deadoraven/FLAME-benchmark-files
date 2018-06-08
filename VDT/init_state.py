@@ -63,8 +63,8 @@ for i in range(len(numPhases)):
     x = i + 1
     for j in range(numPhases[i]):
         y = j + 1
-        devs = (randint(21,30)
-        initMoney = (randint(11,20)
+        devs = randint(21,30)
+        initMoney = randint(11,20)
         totMoney = devs * 3 + initMoney
 
         f.write("""
@@ -90,7 +90,7 @@ for i in range (6000):
         <reserve>0</reserve>
     </xagent>""" % (x))
 
-for i in range (6000,10000)):
+for i in range (6000,10000):
     x = i + 1
     f.write("""
     <xagent>

@@ -112,8 +112,8 @@ int disperse()
               //is this cell signal going the opposite way?
               if(mes_directionX == I && mes_directionY == J){
                 if (DIRECTION_X == mes_i && DIRECTION_Y == mes_j){
-                  DIRECTION_X = STOP;
-                  DIRECTION_Y = STOP;
+                  DIRECTION_X = -1;
+                  DIRECTION_Y = -1;
                 }
                 else{
                   add_int(&destX,mes_i);

@@ -10,22 +10,22 @@ case "$choice" in
 "1")
 CSSmpdboot -n  &
 wait
-mpirun -np $choice ./main $((numTurns)) 0.xml -r
+mpirun -n $choice ./main $((numTurns)) 0.xml -r -f 999999+999999
 ;;
 "2")
 CSSmpdboot -n  &
 wait
-mpirun -np $choice ./main $((numTurns)) 0.xml -r
+mpirun -n $choice ./main $((numTurns)) 0.xml -r -f 999999+999999
 ;;
 "4")
 CSSmpdboot -n  &
 wait
-mpirun -np $choice ./main $((numTurns)) 0.xml -r
+mpirun -n $choice ./main $((numTurns)) 0.xml -r -f 999999+999999
 ;;
 "8")
 CSSmpdboot -n &
 wait
-mpirun -np $choice ./main $((numTurns)) 0.xml  -r
+mpirun -n $choice ./main $((numTurns)) 0.xml  -r -f 999999+999999
 ;;
 *)
 esac
